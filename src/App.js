@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import './assets/bootstrap/css/bootstrap.css';
+import Navbar from './component/Navbar/Navbar';
+import ListBrands from './component/Brand/ListBrands';
+import ListCategories from './component/Category/ListCategory';
+import NotFound from './component/NotFound/Notfound';
+
+const NewRoute = () => {
+  return (
+    <div>
+
+      <ListBrands />
+      <ListCategories />
+    </div>
+  );
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <Switch >
+            <Route path="/" component={NewRoute} exact />
+            <Route path="/brands" component={ListBrands} />
+            <Route path="/categories" component={ListCategories} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+
     );
   }
 }
